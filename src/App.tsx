@@ -149,10 +149,10 @@ function App() {
           <button
             onClick={prev}
             type="button"
-            className={`px-4 py-2 font-semibold text-white transition bg-black border duration-300 border-white rounded-md ${
-              step === 0
-                ? "bg-[#c1b7ad] cursor-auto text-gray-500"
-                : "hover:bg-black/80"
+            className={`px-4 py-2 font-semibold text-white transition  border duration-300 border-white rounded-md ${
+              step > 0
+                ? "bg-black hover:bg-black/80"
+                : "bg-[#c1b7ad] cursor-auto  text-gray-500"
             }`}
           >
             prev
@@ -160,10 +160,10 @@ function App() {
           <button
             onClick={next}
             type="button"
-            className={`px-4 py-2 font-semibold text-white transition bg-black border duration-300 border-white rounded-md ${
-              step === 2
-                ? "bg-[#c1b7ad] cursor-auto text-gray-500"
-                : "hover:bg-black/80"
+            className={`px-4 py-2 font-semibold text-white transition  border duration-300 border-white rounded-md ${
+              step < 2
+                ? "hover:bg-black/80 bg-black"
+                : "bg-[#c1b7ad] cursor-auto text-gray-500"
             }`}
           >
             next
