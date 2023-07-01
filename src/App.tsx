@@ -3,6 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
 
+import { useToast } from "./components/ui/use-toast";
+
 const schema = yup
   .object({
     name: yup.string().required(),
@@ -17,11 +19,13 @@ const schema = yup
 
 function App() {
   const [step, setStep] = useState<number>(0);
+  const { toast } = useToast();
 
   const {
     register,
     handleSubmit,
     trigger,
+
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -29,7 +33,10 @@ function App() {
   });
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    toast({
+      title: "Success!",
+      description: <pre>{JSON.stringify(data, null, 2)}</pre>,
+    });
   });
 
   const prev = () => {
@@ -60,7 +67,7 @@ function App() {
 
   return (
     <>
-      <div className="fixed left-0 w-screen px-1 top-10">
+      <div className="fixed left-0 w-screen px-1 select-none top-10">
         <p className="mx-5 mb-2 text-base font-semibold text-red-600">
           {step + 1} of 3
         </p>
@@ -73,7 +80,7 @@ function App() {
       </div>
       <form
         onSubmit={onSubmit}
-        className="w-screen h-screen overflow-hidden bg-[#EEE2D7]"
+        className="w-screen h-screen overflow-hidden select-none bg-[#EEE2D7]"
       >
         <div
           className="flex w-full h-full transition-transform duration-300 ease-out"
